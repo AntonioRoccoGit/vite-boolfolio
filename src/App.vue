@@ -1,6 +1,7 @@
 <script>
 import axios from 'axios';
 import { store } from './store';
+import AppProjectCard from './components/AppProjectCard.vue';
 export default {
   data() {
     return {
@@ -8,6 +9,10 @@ export default {
       projects: []
     }
   },
+  components: {
+    AppProjectCard,
+    AppProjectCard
+},
   mounted() {
     this.getProjects();
   },
@@ -29,13 +34,7 @@ export default {
     <h2 class="text-center p-4">Backend-Frontend</h2>
     <div class="row row-cols-4 g-4">
       <div v-for="(project, index ) in projects" class="col">
-        <div class="card h-100" :key="index">
-          <img :src="`${this.store.apiUrl}${this.store.imgUrlPrefix}${project.thumb}`" class="card-img-top" :alt="project.slug">
-          <div class="card-body h-100 d-flex flex-column justify-content-end">
-            <h5 class="card-title">{{ project.title }}</h5>
-            <p class="card-text">{{ project.description }}</p>
-          </div>
-        </div>
+        <AppProjectCard :item="project" :key="index" />
       </div>
     </div>
   </div>
