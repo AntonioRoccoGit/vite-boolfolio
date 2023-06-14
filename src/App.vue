@@ -8,7 +8,8 @@ export default {
     return {
       store,
       projects: [],
-      getResult: []
+      getResult: [],
+      currentPage: 0
     }
   },
   components: {
@@ -19,12 +20,17 @@ export default {
     this.getProjects();
   },
   methods: {
-    getProjects() {
+    getProjects(getPage = 1) {
+      const params = {
+        page: getPage
+      };
       axios
-        .get(`${this.store.apiUrl}${this.store.apiProjects}`)
+        .get(`${this.store.apiUrl}${this.store.apiProjects}`, {params})
         .then(resp => {
-          this.projects = resp.data.results.data;
-          this.getResult = resp.data.results;
+          const json = resp.data.results
+          this.getResult = json;
+          this.projects = json.data;
+          this.currentPage = json.current_page;
         });
     }
   }
@@ -45,7 +51,10 @@ export default {
 
     <!-- pagination -->
     <div class="d-flex justify-content-center mt-4">
-      <AppPagination :item="getResult" />
+      <AppPagination :item="getResult" 
+        @next="getProjects(currentPage + 1)"
+        @previously="getProjects(currentPage - 1)"
+      />
     </div>
     <!-- /pagination -->
 

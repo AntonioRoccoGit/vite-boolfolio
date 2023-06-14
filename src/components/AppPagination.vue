@@ -8,7 +8,11 @@ export default {
     },
     props: {
         item: Object,
-    }
+    },
+    emits: [
+        'next',
+        'previously'
+    ]
 }
 </script>
 
@@ -16,7 +20,9 @@ export default {
     <nav aria-label="Page navigation example">
         <ul class="pagination">
             <!-- handle prev button -->
-            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#" @click.prevent="$emit('previously')">Previous</a>
+            </li>
             <!-- /handle prev button -->
 
             <!-- handle number group input -->
@@ -25,7 +31,9 @@ export default {
            
            
             <!-- handle next button -->
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#" @click.prevent="$emit('next')">Next</a>
+            </li>
             <!-- /handle next button -->
         </ul>
     </nav>
