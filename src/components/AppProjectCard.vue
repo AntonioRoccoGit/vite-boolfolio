@@ -1,6 +1,7 @@
 <script>
 import {store} from '../store';
 export default {
+    name: 'AppProjectCard',
     data(){
         return{
             store
