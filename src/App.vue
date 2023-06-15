@@ -8,8 +8,8 @@ export default {
     return {
       store,
       projects: [],
-      getResult: [],
-      currentPage: 0
+      currentPage: 0,
+      lastPage: 0
     }
   },
   components: {
@@ -28,9 +28,9 @@ export default {
         .get(`${this.store.apiUrl}${this.store.apiProjects}`, {params})
         .then(resp => {
           const json = resp.data.results
-          this.getResult = json;
           this.projects = json.data;
           this.currentPage = json.current_page;
+          this.lastPage = json.last_page;
         });
     }
   }
@@ -51,9 +51,10 @@ export default {
 
     <!-- pagination -->
     <div class="d-flex justify-content-center mt-4">
-      <AppPagination :item="getResult" 
-        @next="getProjects(currentPage + 1)"
-        @previously="getProjects(currentPage - 1)"
+      <AppPagination 
+      :currentPage="currentPage" 
+      :lastPage="lastPage"
+      @changePage="getProjects"
       />
     </div>
     <!-- /pagination -->

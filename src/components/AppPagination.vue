@@ -7,11 +7,11 @@ export default {
         }
     },
     props: {
-        item: Object,
+        currentPage: Number,
+        lastPage: Number,
     },
     emits: [
-        'next',
-        'previously'
+        'changePage'
     ]
 }
 </script>
@@ -21,18 +21,32 @@ export default {
         <ul class="pagination">
             <!-- handle prev button -->
             <li class="page-item">
-                <a class="page-link" href="#" @click.prevent="$emit('previously')">Previous</a>
+                <a class="page-link" href="#" 
+                :class="{'disabled' : currentPage === 1}"
+                @click.prevent="$emit('changePage', currentPage - 1)">
+                    Previous
+                </a>
             </li>
             <!-- /handle prev button -->
 
             <!-- handle number group input -->
-            <li v-for="number in item.last_page" class="page-item"><a class="page-link" href="#">{{ number }}</a></li>
+            <li v-for="number in lastPage" class="page-item">
+                <a class="page-link" href="#" 
+                :class="{'active' : number === currentPage }"
+                @click.prevent="$emit('changePage', number)">
+                     {{ number }} 
+                </a>
+            </li>
             <!-- /handle number group input -->
            
            
             <!-- handle next button -->
             <li class="page-item">
-                <a class="page-link" href="#" @click.prevent="$emit('next')">Next</a>
+                <a class="page-link" href="#" 
+                :class="{'disabled' : currentPage === lastPage}"
+                @click.prevent="$emit('changePage', currentPage + 1)">
+                    Next
+                </a>
             </li>
             <!-- /handle next button -->
         </ul>
