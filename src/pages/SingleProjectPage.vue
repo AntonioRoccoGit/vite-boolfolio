@@ -19,9 +19,9 @@ export default {
             axios
                 .get(`${this.store.apiUrl}${this.store.apiProjects}/${slug}`)
                 .then(resp => {
-                this.project = resp.data.results;
-                console.log(this.project);
-            });
+                    this.project = resp.data.results;
+                    console.log(this.project);
+                });
         }
     },
     components: { ProjectCard }
