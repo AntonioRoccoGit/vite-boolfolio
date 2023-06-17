@@ -18,7 +18,6 @@ export default {
             } else {
                 resault = false;
             }
-            console.log(resault);
             return resault;
         },
     },

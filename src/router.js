@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomePage from './pages/HomePage.vue';
-import Posts from './pages/Posts.vue';
+import Project from './pages/project.vue';
 import SingleProjectPage from './pages/SingleProjectPage.vue';
 
 const router = createRouter({
@@ -10,12 +10,12 @@ const router = createRouter({
             path: '/',
             name: 'home',
             component: HomePage,
-            
+
         },
         {
             path: '/posts',
             name: 'posts',
-            component: Posts,
+            component: Project,
         },
         {
             path: '/posts/:slug',
@@ -25,4 +25,4 @@ const router = createRouter({
     ],
 });
 
-export {router};
+export { router };
