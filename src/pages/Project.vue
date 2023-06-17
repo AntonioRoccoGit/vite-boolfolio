@@ -59,7 +59,7 @@ export default {
 
         <div class="mt-2 d-flex justify-content-between">
             <div class="form-group">
-                <select @change="getProjects" id="types" class="form-control mb-2" v-model="filterValue">
+                <select @change="getProjects()" id="types" class="form-control mb-2" v-model="filterValue">
                     <option value="all">Tutte</option>
                     <option v-for='(type) in types' :value="type.id" :key="type.id"> {{ type.title }}</option>
                 </select>
